@@ -1,10 +1,7 @@
-# React Real-Time Chat App
+# MacbaseChat(React Real-Time Chat App)
 
-<p align="center">
-    <img src="http://git-assets.react-starter-kit.com/logo.png">  
-</p>
 
-### [Online Demo](https://react-chatapp-frontend.herokuapp.com)
+### [Online Demo](https://applications/macbase.co.za/macbasechat)
 
 As the Demo is hosted on a free Heroku account, the servers its hosted on enter ‘sleep mode’ when not in use. If you notice a delay, please allow a few seconds for the servers to wake up.
 
@@ -13,7 +10,6 @@ As the Demo is hosted on a free Heroku account, the servers its hosted on enter 
 
 This is a real-time chat application built using React (Create React App on the frontend) and NodeJS/Express/Socket.io Backend.
 
-Users are able to join groups and message other users in real-time.
 
 ### Tech Stack:
 
@@ -24,12 +20,6 @@ Users are able to join groups and message other users in real-time.
 * Moment JS
 * SASS
 
-### Screenshot
-
-<p align="center">
-    <img src="http://git-assets.react-starter-kit.com/react_chat_app.png">  
-</p>
-
 ## Software 
 
 Before proceeding, please ensure you have the following software installed on your computer.
@@ -38,16 +28,6 @@ Before proceeding, please ensure you have the following software installed on yo
 * Yarn (optional but recommended)
 * Git command line tools
 
-### Useful links
-
-* Download Git CLT - Windows: https://git-scm.com/download/windows Mac: https://git-scm.com/download/mac
-* Download Node - https://nodejs.org/en/
-* Download Yarn CLT - https://yarnpkg.com/lang/en/docs/install/
-* Download VSCode - https://code.visualstudio.com/
-
-## Getting started
-
-Please fork a copy of this repository. Forking a repository allows you to freely experiment with changes without affecting the original project. Alternatively download or clone the master branch.
 
 ### Download & Install Dependencies on your machine 
 
