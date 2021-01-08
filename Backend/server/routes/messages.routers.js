@@ -1,10 +1,9 @@
-import from "express";
-
-
 module.exports = (app) => {
-  const Message = require("../controllers/teacher.message");
+  const Message = require("../controllers/message.controller");
+
+  	app.post("/createmessage", Message.create); 
+  	app.get("/getmessages/:userId1/:userId2", Message.getAll); // get all messages between 2 participants
+
+	app.post("/creategroupmessage", Message.createGroupMessage); 
   
-  app.post("/createmessage", Message.create); 	
-  app.post("/deletemessage", Message.delete);
-  app.get("/getmessages/:userId1/:userId2", Message.getall); // get all messages between 2 participants
 };

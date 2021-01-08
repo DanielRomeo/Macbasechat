@@ -1,23 +1,7 @@
-// const Admin:any = require("../models/admin.model");
-import {Request, Response} from "express";
-import Student from "../models/student.model";
+const Student = require("../models/student.model");
 
+exports.create = ((req, res ) => {
 
-/*incase i wanna create a quick user*/
-// const data1:person={
-  
-//   "firstname": "mac",
-//   "lastname": "base",
-//   "idnumber": 9704245550080,
-//   "studentnumber": 201603838,
-//   "institution_id": 1,
-//   "password": "password",
-//   "active": "true"
-// }
-
-// Create and Save a new Student
-exports.create = ((req:any, res: any) => {
-	  // Validate request
 	  if (!req.body) {
 	    res.status(400).send({
 	      message: "Content can not be empty!"
@@ -25,22 +9,14 @@ exports.create = ((req:any, res: any) => {
       	console.log("empty")
 	  }
 
-    // Create an Administrator
-    /*I just noticed that this si not working, for some reason its not identifying the req's*/
 	  const student = new Student({
   		firstname: req.body.firstname,
   		lastname: req.body.lastname,
-      idnumber: req.body.idnumber,
-  		studentnumber: req.body.studentnumber,
-      institution_id: req.body.institution_id,
-  		password: req.body.password,
-  		active: req.body.active
+      username: req.body.username,
+  		password: req.body.password
 	  });
 
-	  // console.log('body is ',req.body);
-
-	  // Save Student in the database
-	  Student.create(student, (err: any, data: any) => {
+	  Student.create(student, (err, data) => {
 	    if (err)
 	      res.status(500).send({
           success: "false",
@@ -51,43 +27,37 @@ exports.create = ((req:any, res: any) => {
 	  });
 });
 
-
-//Retrieve all Student from the database.
-exports.findAll = (req:any, res:any) => {
-  Student.getAll((err:any, data:any): any => {
+exports.findAll = (req, res) => {
+  User.getAll((err, data) => {
     if (err)
       res.status(500).send({
         success: "false",
         message:
-          err.message || "Some error occurred while retrieving Teachers."
+          err.message || "Some error occurred while retrieving Users."
       });
     else res.send(data);
   });
 };
 
-// student
-// Find a single Student with a studentId
-exports.findOne = (req: any, res: any) => {
-  Student.findById(req.params.studentId, (err: any, data: any) => {
+exports.findOne = (req, res) => {
+  User.findById(req.params.userId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
           success: "false",
-          message: `Not found Student with id ${req.params.studentId}.`
+          message: `Not found`
         });
       } else {
         res.status(500).send({
           success: "false",
-          message: "Error retrieving Student with id " + req.params.studentId
+          message: "Error retrieving "
         });
       }
     } else res.send(data);
   });
 };
 
-// login an student:
-exports.login = ((req: any, res:any)=>{
-	// Validate request
+exports.login = ((req, req)=>{
     if (!req.body) {
       res.status(400).send({
         message: "Content can not be empty!"
@@ -96,11 +66,11 @@ exports.login = ((req: any, res:any)=>{
     }
 
     const obj= {
-      studentnumber: req.body.studentnumber,
+      username: req.body.username,
       password: req.body.password
     }
 
-    Student.login(obj, (err: any, data: any) => {
+    User.login(obj, (err, data) => {
       if (err)
         res/*.status(500)*/.send({
           success: "false",
@@ -111,21 +81,20 @@ exports.login = ((req: any, res:any)=>{
 });
 
 
-// get all students from a particular institution_id
-exports.studentsFromInstitution = (req: Request, res: Response) =>{
-  Student.studentsFromInstitution(req.params.institutionId, (err: any, data: any) => {
+exports.delete = (req, res) => {
+  User.delete(req.params.userId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
           success: "false",
-          message: `Not found Student with institution_id of ${req.params.institutionId}.`
+          message: `Not found`
         });
       } else {
         res.status(500).send({
           success: "false",
-          message: "Error retrieving students with institution_id " + req.params.institutionId
+          message: "Error retrieving "
         });
       }
     } else res.send(data);
   });
-}
+};

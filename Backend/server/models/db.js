@@ -2,7 +2,7 @@ const mysqlconnect = require("mysql");
 const dbConfigconnect = require("../config/db.config");
 
 // Create a connection to the database
-let connectionconnect: any = mysqlconnect.createConnection({
+let connectionconnect = mysqlconnect.createConnection({
   host: dbConfigconnect.HOST,
   user: dbConfigconnect.USER,
   password: dbConfigconnect.PASSWORD,
@@ -10,7 +10,7 @@ let connectionconnect: any = mysqlconnect.createConnection({
 });
 
 //open the mysql connection:
-connectionconnect.connect( (error: Error)=>{
+connectionconnect.connect( (error)=>{
 	if (error) throw error;
 	// console.log("Successfully connected to the database..."); 
 });

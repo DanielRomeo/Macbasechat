@@ -1,20 +1,15 @@
-// import queries:
-import {createUsers} from "./tables/createTable.users";
-import {createMessages} from "./tables/createTable.messages";
-
-// import mysql functions:
+const Users = require("./tables/createTable.users");
+const Messages = require("./tables/createTable.messages");
+const Groups = require("./tables/createTable.groups");
 const mysql = require("mysql");
 const dbConfig = require("./db.config");
 
-// Create a connection to the database
 const connection = mysql.createConnection({
   host: dbConfig.HOST,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DB
 });
-
-// connect to the MySQL server
 connection.connect((err) => {
 	if (err) {
 		return console.error('error: ' + err.message);
@@ -28,8 +23,10 @@ connection.connect((err) => {
 			}
 		});
 	}
-
 	console.log("Successfully connected to the database.");
-	createTable(createUsers, "Successfully created the users table");
-	createTable(createMessages, "Successfully created the messages table");
+	createTable(Users.createUsers, "Successfully created the users table");
+	createTable(Messages.createMessages, "Successfully created the messages table");
+	createTable(Groups.createGroup, "Successfully created the createGroup table");
+	createTable(Groups.createGroupMessages, "Successfully created the createGroupMessages table");
+
 });

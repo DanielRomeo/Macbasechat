@@ -1,10 +1,7 @@
-// const Admin:any = require("../models/admin.model");
-import {Request, Response} from "express";
-import Teacher from "../models/teacher.model";
+const Message = require("../models/message.model");
+const Group = require("../models/group.model");
 
-
-exports.create = (req, res) => {
-	  // Validate request
+exports.create = ((req, res) => {
 	  if (!req.body) {
 	    res.status(400).send({
 	      message: "Content can not be empty!"
@@ -15,7 +12,7 @@ exports.create = (req, res) => {
 	  const message = new Message({
   		sender_id: req.body.sender_id,
   		reciever_id: req.body.reciever_id,
-      message: req.body.message
+      	message: req.body.message
 	  });
 
 	  console.log('body is ',req.body);
@@ -27,34 +24,22 @@ exports.create = (req, res) => {
 	      });
 	    else res.send(data);
 	  });
-};
+});
 
-
-exports.findAll = (req, res) => {
-  Message.getAll((err, data)  => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Teachers."
-      });
-    else res.send(data);
-  });
-};
-
-
-// Find a single Teacher with a teacherId
-exports.findOne = (req , res ) => {
-  Messgae.findById(req.params.teacherId, (err , data ) => {
+// gets all users:
+exports.getAll = (req , res ) => { 
+  Message.findById(req.params.userId1, req.params.userId2, (err , data ) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Teacher with id ${req.params.teacherId}.`
+          message: `Not found`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Teacher with id " + req.params.teacherId
+          message: "Server Error"
         });
       }
     } else res.send(data);
   });
 };
+
