@@ -38,7 +38,7 @@ class Chat extends Component {
             room: this.props.match.params.room
         }
 
-        socket = io('http://localhost:8080')
+        socket = io('http://localhost:8090')
 
         socket.emit('join', params, function (err) {
             if (err) {

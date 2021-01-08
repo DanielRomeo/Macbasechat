@@ -7,7 +7,7 @@ const { generateMessage, generateLocationMessage } = require('./utils/message.js
 const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
 const publicPath = path.join(__dirname, '../public');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8090;
 
 const app = express();
 const server = http.createServer(app);
