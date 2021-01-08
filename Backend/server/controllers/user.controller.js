@@ -1,27 +1,26 @@
-const Student = require("../models/student.model");
+const User = require("../models/user.model");
 
 exports.create = ((req, res ) => {
-
 	  if (!req.body) {
 	    res.status(400).send({
 	      message: "Content can not be empty!"
 	    });
       	console.log("empty")
 	  }
-
-	  const student = new Student({
+	  const user = new User({
   		firstname: req.body.firstname,
   		lastname: req.body.lastname,
       username: req.body.username,
-  		password: req.body.password
+  		password: req.body.password,
+      date_created: req.body.date_created
 	  });
 
-	  Student.create(student, (err, data) => {
+	  User.create(user, (err, data) => {
 	    if (err)
 	      res.status(500).send({
           success: "false",
 	        message:
-	          err.message || "Some error occurred while creating the Student."
+	          err.message || "Some error occurred while creating the User."
 	      });
 	    else res.send(data);
 	  });
@@ -57,7 +56,7 @@ exports.findOne = (req, res) => {
   });
 };
 
-exports.login = ((req, req)=>{
+exports.login = ((req, res)=>{
     if (!req.body) {
       res.status(400).send({
         message: "Content can not be empty!"
@@ -80,8 +79,31 @@ exports.login = ((req, req)=>{
     });
 });
 
+// the method isint written yet
+exports.edit = ((req, res) =>{
+  if(!req.body ) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+        console.log("empty")
+    }
 
-exports.delete = (req, res) => {
+    const obj= {
+      username: req.body.username,
+      password: req.body.password
+    }
+
+    User.login(obj, (err, data) => {
+      if (err)
+        res/*.status(500)*/.send({
+          success: "false",
+          message: /*err.message ||*/ "wrong username or password"
+        });
+      else res.send(data);
+    });
+});
+
+exports.delete = ((req, res) => {
   User.delete(req.params.userId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -97,4 +119,5 @@ exports.delete = (req, res) => {
       }
     } else res.send(data);
   });
-};
+});
+

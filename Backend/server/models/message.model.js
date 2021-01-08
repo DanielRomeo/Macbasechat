@@ -9,7 +9,7 @@ class Message{
         this.date_created = teacher.date_created;
     }
 
-    // create method:
+    // create a message:
     static create(newmessage, result) {
       sql.query("INSERT INTO messages SET ?", newmessage, (err, res) => {
         if (err) {
@@ -23,36 +23,19 @@ class Message{
     };
 
     // get all method: /*needs work*/
-    static getAll(result){
-      sql.query("SELECT * FROM messages", (err, res) => {
+    static getAllFromUser(userId1, userId2, result){
+      sql.query(`SELECT * FROM messages WHERE sender_id=${userId1} AND reciever_id=${userId2}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
-      console.log("teacher: ", res);
         result(null, res);
       });
     };
 
-    // find an teacher by ID method:
-    static findById(teacher, result){
-      sql.query(`SELECT * FROM teachers WHERE id = ${teacher}`, (err: Error, res: any) => {
-        if (err) {
-          console.log("error: ", err);
-          result(err, null);
-          return;
-        }
-
-        if (res.length) {
-          console.log("found teacher: ", res[0]);
-          result(null, res[0]);
-          return;
-        }
-        result({ kind: "not_found" }, null);
-      });
-    };
-} ;// end of the class:
+    
+};
 
 
 

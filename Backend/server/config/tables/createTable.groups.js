@@ -1,7 +1,7 @@
-let createGroup = `create table if not exists group(
+let createGroup = `create table if not exists groups(
     id int primary key auto_increment,
     created_id int not null,
-    name int not null,
+    name varchar(200) not null,
     description longtext not null,
     date_created datetime not null
 )`;

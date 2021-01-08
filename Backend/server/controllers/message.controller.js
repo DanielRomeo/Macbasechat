@@ -27,8 +27,11 @@ exports.create = ((req, res) => {
 });
 
 // gets all users:
-exports.getAll = (req , res ) => { 
-  Message.findById(req.params.userId1, req.params.userId2, (err , data ) => {
+/*	what i need to do is: asyncronity
+	get all messages where user1 sent user2 and vice versa; then connect those 2 jsons and res.send only one.
+*/
+exports.getFromUser = (req , res ) => { 
+  Message.getFromUser(req.params.userId1, req.params.userId2, (err , data ) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

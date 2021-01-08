@@ -71,3 +71,8 @@ exports.getGroupMessages = (req, res) =>{
 exports.getAllGroups = () =>{
 
 };
+
+// edit a group
+exports.edit = () =>({
+
+});

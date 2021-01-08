@@ -1,54 +1,31 @@
-import express, { Application, Request, Response, NextFunction } from "express";
 const sql = require("./db");
 
-interface person{
-    firstname: string,
-    lastname: string,
-    idnumber: number,
-    studentnumber: number,
-    institution_id: number,
-    password: string,
-    active: string,
-}
-
-// Students class:
-export default class Student{
-    private firstname: string;
-    private lastname: string;
-    private idnumber: number;
-    private studentnumber: number;
-    private institution_id: number;
-    private password: string;
-    private active: string;
-
-    constructor(student:person){
-        this.institution_id = student.institution_id;
-        this.firstname = student.firstname;
-        this.idnumber = student.idnumber;
-        this.lastname = student.lastname;
-        this.studentnumber = student.studentnumber;
-        this.password = student.password;
-        this.active = student.active;     
+class User{
+   
+    constructor(user){
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
+        this.username = user.username;
+        this.password = user.password;
+        this.date_created = user.date_created;
     }
 
     // create method:
-    static create(newstudent : any, result:any) {
-      sql.query("INSERT INTO students SET ?", newstudent, (err: Error, res: any) => {
+    static create(newuser, result) {
+      sql.query("INSERT INTO users SET ?", newuser, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         }
-
-        console.log("created student: ", { id: res.insertId, ...newstudent });
-        // result(null, { id: res.insertId, ...newstudent }); 
+        console.log("created student: ", { id: res.insertId, ...newuser });
         result(null, {success: "true"})
       });
     };
 
-    // get all method:
-    static getAll(result: any){
-      sql.query("SELECT * FROM students", (err: Error, res: Response) => {
+    // get all users:
+    static getAll(result){
+      sql.query("SELECT * FROM users", (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
@@ -59,63 +36,53 @@ export default class Student{
       });
     };
 
-    // find an student by ID method:
-    static findById(student: any, result: any){
-      sql.query(`SELECT * FROM students WHERE id = ${student}`, (err: Error, res: any) => {
+    // find an user by ID method:
+    static findById(userId, result){
+      sql.query(`SELECT * FROM users WHERE id = ${userId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
-          result({success: "false", message: "student not found"}, null);
+          result({success: "false", message: "user not found"}, null);
           return;
         }
-
         if (res.length) {
-          // console.log("found student: ", res[0]); // res[0] is an array with one object
           result(null, {success: "true"});
           return;
         }
-
-        // not found student with the id
         result({ kind: "not_found" }, null);
       });
     };
 
-    // login the student:
-    static login(obj: any, result: any){
-      sql.query(`SELECT * FROM students WHERE studentnumber = ${obj.studentnumber} AND password = ${obj.password}`, (err: Error, res: any) => {
+    // login the user:
+    static login(obj, result){
+      sql.query(`SELECT * FROM users WHERE username = ${obj.username} AND password = ${obj.password}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
-          // result(err, null);
           result({success: false,   message: "wrong parameters provided"}, null);
           return;
         }
-
         if (res.length) {
-          // console.log("found student: ", res[0]);
           result(null, {success: "true", "result": res[0]});
           return;
         }
-
-        // not found student with the id
         result({ kind: "not_found" }, null);
       });
     };
 
-    /*-----------*/
-
-    static studentsFromInstitution(institution_id: any, result: any){
-      sql.query(`SELECT * FROM students WHERE institution_id = ${institution_id}`, (err: Error, res: any) => {
+    static delete(userId, result){
+      sql.query(`DELETE FROM users WHERE id = ${userId}`, (err, res) => {
         if (err) {
           console.log("error: ", err);
-          result(err, null);
+          result({success: false,   message: "wrong parameters provided"}, null);
           return;
         }
         if (res.length) {
-          // console.log("found student: ", res[0]);
-          result(null, res);
+          result(null, {success: "true"});
           return;
         }
         result({ kind: "not_found" }, null);
       });
     };
+
+    
 
 } ;// end of the class:

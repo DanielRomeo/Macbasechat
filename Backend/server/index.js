@@ -3,6 +3,8 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 
+
+
 const { generateMessage, generateLocationMessage } = require('./utils/message.js');
 const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
@@ -68,6 +70,13 @@ io.on('connection', (socket) => {
     });
 
 });
+
+// import routes:
+require("./config/createTables");
+require("./routes/messages.routers")(app);
+require("./routes/users.routers")(app);
+// require("./app/routes/students.routers")(app);
+
 
 server.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
