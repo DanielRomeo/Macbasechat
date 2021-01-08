@@ -83,6 +83,21 @@ class User{
       });
     };
 
+    // static delete(userId, result){
+    //   sql.query(`UPDATE FROM users WHERE id = ${userId}`, (err, res) => {
+    //     if (err) {
+    //       console.log("error: ", err);
+    //       result({success: false,   message: "wrong parameters provided"}, null);
+    //       return;
+    //     }
+    //     if (res.length) {
+    //       result(null, {success: "true"});
+    //       return;
+    //     }
+    //     result({ kind: "not_found" }, null);
+    //   });
+    // };    
+
     
 
 } ;// end of the class:
