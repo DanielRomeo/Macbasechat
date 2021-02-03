@@ -5,13 +5,17 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.0-alpha1",
     "classnames": "^2.2.6",
     "moment": "^2.22.2",
-    "node-sass": "^4.10.0",
+    "node-sass": "4.14.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-hook-form": "^6.15.1",
     "react-loading-screen": "^0.0.17",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "5.2.0",
+    "reactstrap": "^8.8.1",
     "socket.io-client": "^2.1.1"
   },
   "devDependencies": {

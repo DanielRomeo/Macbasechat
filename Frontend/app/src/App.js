@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import classNames from 'classnames';
-import './assets/scss/styles.scss';
+// import './assets/scss/styles.scss';
 
 import Chat from './pages/chat';
 import Join from './pages/join';
+import Login from './pages/login';
+import Signup from './pages/signup';
+import Profile from './pages/profile';
 
-class App extends Component {
+const App = ()=>{
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      site_loaded: false
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      site_loaded: true
-    });
-  }
-
-  render() {
     return (
-      <div className={classNames({'App': true, 'site_loaded': this.state.site_loaded})}>
+      <div>
         <Router>
           <Switch>
+              <Route path="/join" component={Join} />
             <Route path="/chat/:name/:room" component={Chat} />
-            <Route path="/" component={Join} />
+            <Route path="/profile/:username" component={Profile} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
           </Switch>
         </Router>
       </div>
     );
-  }
 }
 
 export default App;

@@ -1,0 +1,51 @@
+/**/
+$darkishBlue : #226089;
+$lightishBlue: #4592af;
+$black: #000000;
+$brownish: #e3c4a8;
+
+
+input[type="text"],input[type="password"], textarea {
+  background-color : #d1d1d1;
+  border: 2px solid black; 
+  border-radius: 0px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+   background-color : #d1d1d1;
+   box-shadow: none;
+    
+}
+
+#submitButton{
+	border: 2px solid $black;
+	border-radius: 0px;
+	background: $black;
+	color: white;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) { 
+
+}
+
+/* Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+
+}
+
+/* Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+
+}
+
+/* Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+	#submitButton{
+		margin-top: 40px;
+		margin-bottom: 40px;
+	}
+}
